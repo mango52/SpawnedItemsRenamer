@@ -30,6 +30,10 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.hasPermission("spawneditemsrenamer.item")) {
+
+					if ((args.length == 0) || (args.length > 2))
+						return false;
+					
 					Material material = Material.matchMaterial(args[0]);
 					int amount;
 					
@@ -73,6 +77,10 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.hasPermission("spawneditemsrenamer.item")) {
+					
+					if ((args.length == 0) || (args.length > 3))
+						return false;
+					
 					Player target;
 					Material material = Material.matchMaterial(args[1]);
 					int amount;
