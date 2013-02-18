@@ -1,14 +1,14 @@
 name: SpawnedItemsRenamer
 main: com.eodomo.SpawnedItemsRenamer.SpawnedItemsRenamer
-version: 1.0.1
+version: b1
 commands:
   i:
-    description: Overrides the </i> command to display the player's name.
-    permission: spawneditemsrenamer.rename
-    usage: /i <your name> <itemID/itemName>
+    description: Spawns a specified amount of the specified item.
+    permission: spawneditemsrenamer.item
+    usage: /i <itemID/itemName> <amount>
     permission-message: You don't have permission to use this command!
   give:
-    description: Overrides the </give> command to display the player's name.
-    permission: spawneditemsrenamer.rename
-    usage: /give <your name> <itemID/itemName>
+    description: Gives a specified player a specifed amount of the specified item.
+    permission: spawneditemsrenamer.give
+    usage: /give <name> <itemID/itemName> <amount>
     permission-message: You don't have permission to use this command!
