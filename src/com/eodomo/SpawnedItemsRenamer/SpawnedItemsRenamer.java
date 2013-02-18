@@ -53,11 +53,13 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					
 					ItemStack stack = new ItemStack(material, amount);
 					ItemMeta meta = stack.getItemMeta();
-					ArrayList<String> lore = new ArrayList<String>(); //test start
+					ArrayList<String> lore = new ArrayList<String>();
 					lore.add(player.getName());
 					meta.setLore(lore);
 					stack.setItemMeta(meta);
 					player.getInventory().addItem(stack);
+					
+					return true;
 				} else {
 					player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command.");
 					return false;
@@ -89,7 +91,6 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 				return false;
 			}
 		}
-
 		return false;
 	}
 }
