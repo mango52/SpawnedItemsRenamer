@@ -39,7 +39,7 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					
 					if (material == null) {
 						player.sendMessage(ChatColor.DARK_RED + "\"" + args[0] + "\" is not a valid item!");
-						return false;
+						return true;
 					}
 					
 					if (args.length == 1) {
@@ -49,7 +49,7 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 							amount = Integer.parseInt(args[1]);
 						} catch (NumberFormatException e) {
 							player.sendMessage(ChatColor.DARK_RED + "\"" + args[1] + "\" is not a valid number!");
-							return false;
+							return true;
 						}
 					} else
 						return false;
@@ -65,11 +65,11 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					return true;
 				} else {
 					player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command.");
-					return false;
+					return true;
 				}
 			} else {
 				sender.sendMessage(ChatColor.DARK_RED + "Only players can use this command.");
-				return false;
+				return true;
 			}
 		}
 
@@ -93,17 +93,17 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					
 					if (foundPlayers.isEmpty()) {
 						player.sendMessage(ChatColor.DARK_RED + "I could not find any players matching that name.");
-						return false;
+						return true;
 					} else if (foundPlayers.size() > 1) {
 						player.sendMessage(ChatColor.DARK_RED + "I found multiple players with that name - please be more specific.");
-						return false;
+						return true;
 					} else {
 						target = foundPlayers.get(0);
 					}
 					
 					if (material == null) {
 						player.sendMessage(ChatColor.DARK_RED + "\"" + args[1] + "\" is not a valid item!");
-						return false;
+						return true;
 					}
 					
 					if (args.length == 2) {
@@ -113,7 +113,7 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 							amount = Integer.parseInt(args[2]);
 						} catch (NumberFormatException e) {
 							player.sendMessage(ChatColor.DARK_RED + "\"" + args[2] + "\" is not a valid number!");
-							return false;
+							return true;
 						}
 					} else
 						return false;
@@ -129,11 +129,11 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					return true;
 				} else {
 					player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command.");
-					return false;
+					return true;
 				}
 			} else {
 				sender.sendMessage(ChatColor.DARK_RED + "Only players can use this command.");
-				return false;
+				return true;
 			}
 		}
 		return false;
