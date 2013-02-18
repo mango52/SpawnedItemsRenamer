@@ -2,6 +2,7 @@ package com.eodomo.SpawnedItemsRenamer;
 
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -29,14 +30,17 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.hasPermission("spawneditemsrenamer.item")) {
-					Material material;
+					Material material = Material.matchMaterial(args[0]);
 					int amount;
 					
+					if (material == null) {
+						player.sendMessage(ChatColor.DARK_RED + args[0] + " is not a valid item!");
+						return false;
+					}
+					
 					if (args.length == 1) {
-						material = Material.matchMaterial(args[0]);
 						amount = 1;
 					} else if (args.length == 2) {
-						material = Material.matchMaterial(args[0]);
 						try {
 							amount = Integer.parseInt(args[1]);
 						} catch (NumberFormatException e) {
@@ -45,11 +49,6 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 						}
 					} else
 						return false;
-					
-					if (material == null) {
-						player.sendMessage(ChatColor.DARK_RED + args[0] + " is not a valid item!");
-						return false;
-					}
 					
 					ItemStack stack = new ItemStack(material, amount);
 					ItemMeta meta = stack.getItemMeta();
@@ -71,17 +70,55 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 		}
 
 		if (command.getName().equalsIgnoreCase("give")) {
-			if (sender instanceof Player){
+			if (sender instanceof Player) {
 				Player player = (Player) sender;
-				if (player.hasPermission("spawneditemsrenamer.give")) {
-					if ((args.length > 0) && (args.length < 3)) {
-						Material material = Material.matchMaterial(args[0]);
-						ItemStack stack = new ItemStack(material);
-						stack.getItemMeta().setDisplayName("test - " + player.getName());
-						player.getInventory().addItem(stack);
-						return true;
+				if (player.hasPermission("spawneditemsrenamer.item")) {
+					Player target;
+					Material material = Material.matchMaterial(args[1]);
+					int amount;
+					
+					ArrayList<Player> foundPlayers = new ArrayList<Player>();
+					for (Player temp : Bukkit.getServer().getOnlinePlayers()) {
+						if (temp.getName().contains(args[0]))
+							foundPlayers.add(temp);
+					}
+					
+					if (foundPlayers.isEmpty()) {
+						player.sendMessage("Could not find any players matching that name.");
+						return false;
+					} else if (foundPlayers.size() > 1) {
+						player.sendMessage("Found multiple players with that name - please be more specific.");
+						return false;
+					} else {
+						target = foundPlayers.get(0);
+					}
+					
+					if (material == null) {
+						player.sendMessage(ChatColor.DARK_RED + args[0] + " is not a valid item!");
+						return false;
+					}
+					
+					if (args.length == 2) {
+						amount = 1;
+					} else if (args.length == 3) {
+						try {
+							amount = Integer.parseInt(args[2]);
+						} catch (NumberFormatException e) {
+							player.sendMessage(ChatColor.DARK_RED + args[2] + " is not a valid number!");
+							return false;
+						}
 					} else
 						return false;
+					
+					ItemStack stack = new ItemStack(material, amount);
+					ItemMeta meta = stack.getItemMeta();
+					ArrayList<String> lore = new ArrayList<String>();
+					lore.add(player.getName());
+					meta.setLore(lore);
+					stack.setItemMeta(meta);
+					target.getInventory().addItem(stack);
+					
+					return true;
 				} else {
 					player.sendMessage(ChatColor.DARK_RED + "You don't have permission to use this command.");
 					return false;

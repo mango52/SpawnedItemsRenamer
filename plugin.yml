@@ -5,10 +5,10 @@ commands:
   i:
     description: Spawns a specified amount of the specified item.
     permission: spawneditemsrenamer.item
-    usage: /i <itemID/itemName> <amount>
+    usage: /i <itemID/itemName> [amount]
     permission-message: You don't have permission to use this command!
   give:
     description: Gives a specified player a specifed amount of the specified item.
     permission: spawneditemsrenamer.give
-    usage: /give <name> <itemID/itemName> <amount>
+    usage: /give <name> <itemID/itemName> [amount]
     permission-message: You don't have permission to use this command!
