@@ -38,7 +38,7 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					int amount;
 					
 					if (material == null) {
-						player.sendMessage(ChatColor.DARK_RED + args[0] + " is not a valid item!");
+						player.sendMessage(ChatColor.DARK_RED + "\"" + args[0] + "\" is not a valid item!");
 						return false;
 					}
 					
@@ -48,7 +48,7 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 						try {
 							amount = Integer.parseInt(args[1]);
 						} catch (NumberFormatException e) {
-							player.sendMessage(ChatColor.DARK_RED + args[1] + " is not a valid number!");
+							player.sendMessage(ChatColor.DARK_RED + "\"" + args[1] + "\" is not a valid number!");
 							return false;
 						}
 					} else
@@ -92,17 +92,17 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 					}
 					
 					if (foundPlayers.isEmpty()) {
-						player.sendMessage("Could not find any players matching that name.");
+						player.sendMessage(ChatColor.DARK_RED + "I could not find any players matching that name.");
 						return false;
 					} else if (foundPlayers.size() > 1) {
-						player.sendMessage("Found multiple players with that name - please be more specific.");
+						player.sendMessage(ChatColor.DARK_RED + "I found multiple players with that name - please be more specific.");
 						return false;
 					} else {
 						target = foundPlayers.get(0);
 					}
 					
 					if (material == null) {
-						player.sendMessage(ChatColor.DARK_RED + args[0] + " is not a valid item!");
+						player.sendMessage(ChatColor.DARK_RED + "\"" + args[1] + "\" is not a valid item!");
 						return false;
 					}
 					
@@ -112,7 +112,7 @@ public final class SpawnedItemsRenamer extends JavaPlugin {
 						try {
 							amount = Integer.parseInt(args[2]);
 						} catch (NumberFormatException e) {
-							player.sendMessage(ChatColor.DARK_RED + args[2] + " is not a valid number!");
+							player.sendMessage(ChatColor.DARK_RED + "\"" + args[2] + "\" is not a valid number!");
 							return false;
 						}
 					} else
